@@ -1,7 +1,7 @@
 
 import { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Text, Float, Stars } from "@react-three/drei";
+import { OrbitControls, Float } from "@react-three/drei";
 import { motion } from "framer-motion";
 import * as THREE from "three";
 
@@ -16,12 +16,7 @@ function AnimatedSphere() {
   return (
     <mesh ref={meshRef}>
       <sphereGeometry args={[1.5, 64, 64]} />
-      <meshStandardMaterial 
-        color="#8b5cf6" 
-        wireframe
-        transparent
-        opacity={0.4}
-      />
+      <meshStandardMaterial color="#8b5cf6" wireframe />
     </mesh>
   );
 }
@@ -38,12 +33,16 @@ function AnimatedTorus() {
   return (
     <mesh ref={meshRef} position={[0, 0, 0]}>
       <torusGeometry args={[3, 0.4, 16, 100]} />
-      <meshStandardMaterial 
-        color="#e5deff" 
-        wireframe
-        transparent
-        opacity={0.2}
-      />
+      <meshStandardMaterial color="#e5deff" wireframe />
+    </mesh>
+  );
+}
+
+function PortfolioText() {
+  return (
+    <mesh position={[0, 0, 0]}>
+      <boxGeometry args={[2, 0.5, 0.1]} />
+      <meshStandardMaterial color="#ffffff" />
     </mesh>
   );
 }
@@ -51,31 +50,12 @@ function AnimatedTorus() {
 function Scene() {
   return (
     <>
-      <Stars
-        radius={50}
-        depth={50}
-        count={1000}
-        factor={4}
-        fade
-        speed={1}
-      />
       <ambientLight intensity={0.5} />
       <directionalLight position={[10, 10, 5]} intensity={1} />
       <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
         <AnimatedSphere />
         <AnimatedTorus />
-        <Text
-          position={[0, 0, 0]}
-          color="#ffffff"
-          fontSize={0.6}
-          maxWidth={2}
-          lineHeight={1}
-          letterSpacing={0.02}
-          textAlign="center"
-          font="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap"
-        >
-          PORTFOLIO
-        </Text>
+        <PortfolioText />
       </Float>
       <OrbitControls enableZoom={false} enablePan={false} enableRotate={true} />
     </>
